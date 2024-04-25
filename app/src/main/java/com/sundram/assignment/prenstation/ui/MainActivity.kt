@@ -64,31 +64,35 @@ class MainActivity : AppCompatActivity() {
 
     fun onLoad(page: Int) {
         // Calculate the start and end index for the current page
-        CoroutineScope(Dispatchers.IO).launch {
-            val startIndex = page * pageSize
-            val endIndex = startIndex + pageSize
-            val paginateList = ArrayList<PostsItem>()
-            if (apiResponseDataList.size >= endIndex) {
-                // Simulate loading data for the current page
-                for (i in startIndex until endIndex) {
-                    paginateList.add(apiResponseDataList[i])
+      try {
+          CoroutineScope(Dispatchers.IO).launch {
+              val startIndex = page * pageSize
+              val endIndex = startIndex + pageSize
+              val paginateList = ArrayList<PostsItem>()
+              if (apiResponseDataList.size >= endIndex) {
+                  // Simulate loading data for the current page
+                  for (i in startIndex until endIndex) {
+                      paginateList.add(apiResponseDataList[i])
 
-                }
-                Handler(Looper.getMainLooper()).post {
-                    dataList.addAll(paginateList)
-                    adapter.differ.submitList(dataList)
-                    adapter.notifyDataSetChanged()
-                }
-            } else {
-                Handler(Looper.getMainLooper()).post {
-                    Toast.makeText(
-                        /* context = */ this@MainActivity,
-                        /* text = */ resources.getString(R.string.you_reached_at_the_end_of_the_page),
-                        /* duration = */ Toast.LENGTH_LONG
-                    ).show()
-                }
-            }
-        }
+                  }
+                  Handler(Looper.getMainLooper()).post {
+                      dataList.addAll(paginateList)
+                      adapter.differ.submitList(dataList)
+                      adapter.notifyDataSetChanged()
+                  }
+              } else {
+                  Handler(Looper.getMainLooper()).post {
+                      Toast.makeText(
+                          /* context = */ this@MainActivity,
+                          /* text = */ resources.getString(R.string.you_reached_at_the_end_of_the_page),
+                          /* duration = */ Toast.LENGTH_LONG
+                      ).show()
+                  }
+              }
+          }
+      }catch (ex:Exception){
+          Toast.makeText(this@MainActivity,resources.getString(R.string.something_went_wrong),Toast.LENGTH_LONG).show()
+      }
     }
 
     private fun initPostRecyclerView() {
