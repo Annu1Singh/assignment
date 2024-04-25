@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="post"
+            type="com.sundram.assignment.data.datamodel.PostsItem" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_8dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_5dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/userIdTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_5dp"
+                android:text="@{`User Id = `+post.userId}"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/idTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_5dp"
+                android:text="@{`Post Id = `+post.id}"
+                app:layout_constraintTop_toBottomOf="@id/userIdTv" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/titleTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_5dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{`Post title = `+post.title}"
+                app:layout_constraintTop_toBottomOf="@id/idTV" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/bodyTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_5dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{`Post Details = `+post.body}"
+                app:layout_constraintTop_toBottomOf="@id/titleTv" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>
